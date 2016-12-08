@@ -1,37 +1,28 @@
 import ReactDOM, { Component } from 'react';
 import React from 'react';
-import 'whatwg-fetch'
+import Todo from './Todo';
+import TodoInput from './TodoInput';
+import 'whatwg-fetch';
 
-class TodoList extends Component {
-  constructor() {
-    super();
+export default class TodoList extends Component {
+  constructor(props) {
+    super(props);
     this.state = {todos: []};
     this._fetchTodos = this._fetchTodos.bind(this);
+    this.url = 'https://myawesome-todolist-react.herokuapp.com/todo';
   }
 
-  render() {
-    this._fetchTodos();
 
-    return <ul className="todo-list">
-               {this.state.todos.map((todo) => {
-                   return <li>
-                            <Todo name={todo.name}/>
-                          </li>
-                   debugger
-                 })
-               }
-           </ul>
-  }
   _fetchTodos() {
-    var url = 'https://myawesome-todolist-react.herokuapp.com/todo';
     var header = {"Content-Type": "application/json"};
-    var options = {method: 'GET'};//};
-    fetch(url, options).then(response => {
+    var options = {method: 'GET'};
+    fetch(this.url, options).then((response) => {
       return response.json();
-    }).then(json => {
+    }).then((json) => {
       this.setState({todos: json});
     });
   }
+
   _getTodos() {
     const todos = [
       { id: 1, name: "task1", done: false},
@@ -46,17 +37,37 @@ class TodoList extends Component {
       );
     });
   }
-}
 
-class Todo extends Component {
+  _sendTodo(todo) {
+    const result = fetch(this.url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: todo
+            }).then((response) => {
+              return response.json();
+            }).then((json) => {
+              console.log('second:then:response: ', json);
+            });
+
+  }
+
   render() {
-    const props = [];
-    return <div className="view">
-            <input className="toggle" type="checkbox"/>
-            <label>{this.props.name}</label>
-            <button className="destroy"></button>
-           </div>
+    this._fetchTodos();
+
+    return(
+        <div>
+          <TodoInput />
+          <ul className="todo-list">
+                 {this.state.todos.map((todo, index) => {
+                     return <li>
+                              <Todo name={todo ? todo.name : 'default' + index}/>
+                            </li>
+                   })
+                 }
+             </ul>
+        </div>
+    );
   }
 }
-
-export default TodoList;
