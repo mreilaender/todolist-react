@@ -23,7 +23,7 @@ class TodoList extends Component {
            </ul>
   }
   _fetchTodos() {
-    var url = 'http://192.168.43.157:8080/todo';
+    var url = 'https://myawesome-todolist-react.herokuapp.com/todo';
     var header = {"Content-Type": "application/json"};
     var options = {method: 'GET'};//};
     fetch(url, options).then(response => {
