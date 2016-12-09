@@ -16,7 +16,7 @@ export default class TodoList extends Component {
 
   _fetchTodos() {
     var header = {"Content-Type": "application/json"};
-    var options = {method: 'GET'};
+    var options = {method: 'GET', credentials: 'include'};
     fetch(this.url, options).then((response) => {
       return response.json();
     }).then((json) => {
@@ -28,7 +28,7 @@ export default class TodoList extends Component {
   _sendTodo(todo) {
     alert("Test");
     var header = {'Content-Type': 'application/json'};
-    var options = { method: 'POST', headers: header, body: todo };
+    var options = { method: 'POST', credentials: 'include', headers: header, body: todo };
     const result = fetch(this.url, options).then((response) => {
               return response.json();
             }).then((json) => {
