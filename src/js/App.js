@@ -48,7 +48,7 @@ export default class TodoList extends Component {
             }).then((json) => {
               console.log('second:then:response: ', json);
             });
-
+    debugger
   }
 
   _onKeyPress(event) {
