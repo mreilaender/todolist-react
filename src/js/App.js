@@ -10,8 +10,7 @@ export default class TodoList extends Component {
     this.state = {todos: []};
     this._fetchTodos = this._fetchTodos.bind(this);
     this._onKeyPress = this._onKeyPress.bind(this);
-    //this.url = 'https://mytodolist-rest.herokuapp.com/todo';
-    this.url = 'http://localhost:8080/todo';
+     this.url = 'https://mytodolist-rest.herokuapp.com/todo';
   }
 
 
