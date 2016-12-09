@@ -34,6 +34,7 @@ export default class TodoList extends Component {
               return json;
             });
             // TODO: return false if rest call fails
+    debugger
     return true;
   }
 
