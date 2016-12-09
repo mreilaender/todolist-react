@@ -46,7 +46,7 @@ export default class TodoList extends Component {
     const result = fetch(this.url, options).then((response) => {
               return response.json();
             }).then((json) => {
-              console.log('second:then:response: ', json);
+              return json;
             });
     debugger
   }
