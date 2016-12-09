@@ -11,12 +11,14 @@ export default class TodoList extends Component {
     this._fetchTodos = this._fetchTodos.bind(this);
     this._onKeyPress = this._onKeyPress.bind(this);
      this.url = 'https://mytodolist-rest.herokuapp.com/todo';
+     this.localdomain = 'https://mytodolist-react.herokuapp.com';
+     //this.url = 'http://localhost:8080/todo';
   }
 
 
   _fetchTodos() {
-    var header = {"Content-Type": "application/json"};
-    var options = {method: 'GET', credentials: 'include'};
+    var header = {"Content-Type": "application/json", 'Access-Control-Allow-Origin': 'true', 'Origin': this.localdomain};
+    var options = {method: 'GET', credentials: 'include', headers: header};
     fetch(this.url, options).then((response) => {
       return response.json();
     }).then((json) => {
@@ -27,7 +29,7 @@ export default class TodoList extends Component {
 
   _sendTodo(todo) {
     alert("Test");
-    var header = {'Content-Type': 'application/json'};
+    var header = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'true', 'Origin': this.localdomain};
     var options = { method: 'POST', credentials: 'include', headers: header, body: todo };
     const result = fetch(this.url, options).then((response) => {
               return response.json();
