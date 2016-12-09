@@ -17,7 +17,7 @@ export default class TodoList extends Component {
 
 
   _fetchTodos() {
-    var header = {"Content-Type": "application/json", 'Origin': this.localdomain, 'Access-Control-Request-Method': 'GET', 'Access-Control-Request-Headers': 'X-Requested-With'};
+    var header = {"Content-Type": "multipart/form-data", 'Origin': this.localdomain, 'Access-Control-Request-Method': 'GET', 'Access-Control-Request-Headers': 'X-Requested-With'};
     var options = {method: 'GET', credentials: 'include', headers: header};
     fetch(this.url, options).then((response) => {
       return response.json();
