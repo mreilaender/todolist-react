@@ -54,7 +54,7 @@ export default class TodoList extends Component {
   _onKeyPress(event) {
     if(event.key == 'Enter') {
       alert("here")
-      var todo = { name: event.currentTarget.value, done: false};
+      var todo = { name: event.currentTarget.value, done: "false"};
       this._sendTodo(todo);
     }
   }
