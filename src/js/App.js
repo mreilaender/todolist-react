@@ -10,7 +10,8 @@ export default class TodoList extends Component {
     this.state = {todos: []};
     this._fetchTodos = this._fetchTodos.bind(this);
     this._onKeyPress = this._onKeyPress.bind(this);
-    this.url = 'https://mytodolist-rest.herokuapp.com/todo';
+    //this.url = 'https://mytodolist-rest.herokuapp.com/todo';
+    this.url = 'http://localhost:8080/todo';
   }
 
 
@@ -24,21 +25,6 @@ export default class TodoList extends Component {
     });
   }
 
-  _getTodos() {
-    const todos = [
-      { id: 1, name: "task1", done: false},
-      { id: 2, name: "task2", done: true},
-      { id: 3, name: "asd", done: true}
-    ];
-    return todos.map((todo) => {
-      return (
-        <li>
-          <Todo name={todo.name}/>
-        </li>
-      );
-    });
-  }
-
   _sendTodo(todo) {
     alert("Test");
     var header = {'Content-Type': 'application/json'};
@@ -48,14 +34,14 @@ export default class TodoList extends Component {
             }).then((json) => {
               return json;
             });
-    debugger
+            // TODO: return false if rest call fails
+    return true;
   }
 
   _onKeyPress(event) {
     if(event.key == 'Enter') {
-      alert("here")
-      var todo = { name: event.currentTarget.value, done: "false"};
-      this._sendTodo(todo);
+      var todo = JSON.stringify({ name: event.currentTarget.value, done: false});
+      return this._sendTodo(todo);
     }
   }
   render() {
