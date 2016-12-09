@@ -9,6 +9,7 @@ export default class TodoList extends Component {
     super(props);
     this.state = {todos: []};
     this._fetchTodos = this._fetchTodos.bind(this);
+    this._onKeyPress = this._onKeyPress.bind(this);
     this.url = 'https://myawesome-todolist-react.herokuapp.com/todo';
   }
 
@@ -39,13 +40,10 @@ export default class TodoList extends Component {
   }
 
   _sendTodo(todo) {
-    const result = fetch(this.url, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: todo
-            }).then((response) => {
+    alert("Test");
+    var header = {'Content-Type': 'application/json'};
+    var options = { method: 'POST', headers: header, body: todo };
+    const result = fetch(this.url, options).then((response) => {
               return response.json();
             }).then((json) => {
               console.log('second:then:response: ', json);
@@ -53,12 +51,19 @@ export default class TodoList extends Component {
 
   }
 
+  _onKeyPress(event) {
+    if(event.key == 'Enter') {
+      alert("here")
+      var todo = { name: event.currentTarget.value, done: false};
+      this._sendTodo(todo);
+    }
+  }
   render() {
     this._fetchTodos();
 
     return(
         <div>
-          <TodoInput />
+          <TodoInput onKeyPress={this._onKeyPress.bind(this)} />
           <ul className="todo-list">
                  {this.state.todos.map((todo, index) => {
                      return <li>
