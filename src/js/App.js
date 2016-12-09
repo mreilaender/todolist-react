@@ -22,6 +22,7 @@ export default class TodoList extends Component {
     }).then((json) => {
       this.setState({todos: json});
     });
+    debugger
   }
 
   _sendTodo(todo) {
