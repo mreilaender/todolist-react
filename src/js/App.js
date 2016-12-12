@@ -24,7 +24,6 @@ export default class TodoList extends Component {
     }).then((json) => {
       this.setState({todos: json});
     });
-    debugger
   }
 
   _sendTodo(todo) {
@@ -37,7 +36,6 @@ export default class TodoList extends Component {
               return json;
             });
             // TODO: return false if rest call fails
-    debugger
     return true;
   }
 
@@ -48,7 +46,6 @@ export default class TodoList extends Component {
     }
   }
   render() {
-    this._fetchTodos();
 
     return(
         <div>
